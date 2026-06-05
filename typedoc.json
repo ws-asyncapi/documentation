@@ -1,0 +1,25 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
+	"tsconfig": "./tsconfig.typedoc.json",
+	"out": "docs/api",
+	"entryPointStrategy": "resolve",
+	"entryPoints": [
+		"../core/src/index.ts",
+		"../client/src/index.ts",
+		"../query-core/src/index.ts",
+		"../react/src/index.ts",
+		"../solid/src/index.ts",
+		"../cursors/src/index.ts",
+		"../emitter/src/index.ts",
+		"../testing/src/index.ts"
+	],
+	"name": "ws-asyncapi API",
+	"readme": "none",
+	"githubPages": false,
+	"hideGenerator": true,
+	"excludeInternal": true,
+	"excludePrivate": true,
+	"sort": ["source-order"],
+	"skipErrorChecking": true
+}
