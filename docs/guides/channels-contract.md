@@ -66,9 +66,9 @@ AsyncAPI document is generated.
 ## Validators
 
 Any [Standard Schema](https://standardschema.dev) validator works — zod, valibot,
-arktype — as well as [TypeBox](https://github.com/sinclairzod/typebox). The
-schema's **input** shape validates inbound payloads; its **output** (parsed) shape
-is what handlers and the client see, so transforms and defaults flow through.
+arktype. The schema's **input** shape validates inbound payloads; its **output**
+(parsed) shape is what handlers and the client see, so transforms and defaults
+flow through.
 
 ## Connection lifecycle & context
 

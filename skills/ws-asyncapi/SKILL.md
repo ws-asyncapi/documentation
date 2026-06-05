@@ -139,7 +139,7 @@ Load the reference for the task at hand:
 2. **Prefer `createClient<typeof channel>`** (codegen-free) unless client and
    server live in separate repos — then use the [CLI](references/codegen.md).
 3. **Any [Standard Schema](https://standardschema.dev) validator** works (zod,
-   valibot, arktype) plus TypeBox. Query/headers schemas use TypeBox.
+   valibot, arktype) — for message payloads and `.query`/`.headers` alike.
 4. **Subscribe to rooms in `.onOpen`**, publish with `ws.publish(topic, event, data)`.
 5. **Throw `RpcError(code, message, data)`** from handlers for typed, recoverable
    errors; declare the code in the `.rpc(..., errors)` map for typed `data`.

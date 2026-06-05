@@ -26,7 +26,7 @@ You need the core, the Node adapter, the client, and a validator. We'll use
 :::
 
 ::: tip
-Prefer valibot, arktype, or TypeBox? Any [Standard Schema](https://standardschema.dev)
+Prefer valibot or arktype? Any [Standard Schema](https://standardschema.dev)
 validator works — see [Channels & the contract](/guides/channels-contract#validators).
 Stick with zod for this tutorial.
 :::

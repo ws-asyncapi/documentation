@@ -105,10 +105,9 @@ within a channel (the builder rejects collisions when the doc is generated).
 ## Validators
 
 Any [Standard Schema](https://standardschema.dev) validator (zod, valibot,
-arktype) or [TypeBox](https://github.com/sinclairzod/typebox). The schema's
-**input** shape validates inbound payloads; its **output** (parsed) shape is what
-handlers and the client see, so defaults and transforms flow through. (Query and
-headers schemas, set via `.query`/`.headers`, use TypeBox.)
+arktype). The schema's **input** shape validates inbound payloads; its **output**
+(parsed) shape is what handlers and the client see, so defaults and transforms
+flow through. This includes the `.query`/`.headers` schemas.
 
 ## Typed context: `derive` / `resolve`
 
