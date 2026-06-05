@@ -8,7 +8,10 @@ import {
 import llms, { copyOrDownloadAsMarkdownButtons } from "vitepress-plugin-llms";
 import { packageManagersMarkdownPlugin } from "vitepress-plugin-package-managers";
 
-const SITE = "https://ws-asyncapi.dev";
+// Public site origin — used for the sitemap, canonical links, OG tags, and
+// llms.txt. PLACEHOLDER: set the real domain via `SITE_URL` (or edit here) before
+// deploying. There is no confirmed ws-asyncapi domain yet.
+const SITE = process.env.SITE_URL ?? "https://example.invalid";
 
 // TypeDoc-generated API sidebar — present only after `bun run gen:typedoc`.
 // typedoc-vitepress-theme writes an array (one entry per package module); we wrap

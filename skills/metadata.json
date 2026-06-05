@@ -1,6 +1,0 @@
-{
-	"version": "0.1.0",
-	"organization": "ws-asyncapi",
-	"abstract": "ws-asyncapi — contract-first, end-to-end typed WebSocket framework for TypeScript (Node.js/Bun, Elysia). Use proactively for ANY ws-asyncapi task: defining a Channel (serverMessage/clientMessage/rpc/serverRpc/stream/presence/history/onAuth), serving with createNodeWsServer/wsAsyncAPIAdapter, the typed createClient<typeof channel>(), React/Solid bindings, live cursors, Redis scaling, reconnection/recovery, and AsyncAPI codegen. Activate on sight of `ws-asyncapi`/`@ws-asyncapi/*`, `new Channel()`, or `createClient`, or when building chat, presence, multiplayer cursors, live dashboards, or typed RPC over WebSockets.",
-	"references": ["https://ws-asyncapi.dev/llms.txt"]
-}

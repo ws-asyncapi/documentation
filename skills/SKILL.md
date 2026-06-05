@@ -18,16 +18,39 @@ The thesis: **Socket.IO's runtime + tRPC-grade end-to-end types + AsyncAPI docs.
 
 ## When to use this skill
 
-- Defining or modifying a `Channel` (the contract)
-- Server → client events, client → server commands, or typed RPC (request/reply)
-- Server streams (async generators) consumed with `for await`
-- Typed presence (who's online + their state) and per-room history/rewind
-- Live multiplayer cursors
-- Mid-connection auth / token refresh
-- Serving channels (Node `ws` or Elysia adapter), or scaling out with Redis
-- Building the typed client, or React/Solid bindings over TanStack Query
-- Reconnection, heartbeats, connection-state recovery
-- Emitting the AsyncAPI 3.0 document or generating a client with the CLI
+**Activate on sight of any of these** (strong signals):
+
+- Imports from `ws-asyncapi` or `@ws-asyncapi/*` (`adapter-node`, `adapter-elysia`,
+  `client`, `react`, `solid`, `cursors`, `backplane-redis`, `codec-msgpack`,
+  `emitter`, `testing`, `query-core`, `cli`).
+- The symbols `new Channel(`, `createClient(`, `createNodeWsServer(`,
+  `wsAsyncAPIAdapter(`, `createReactClient(`, `createSolidClient(`,
+  `cursorsStore(`, `getAsyncApiDocument(`, `websocketAsyncAPI(`.
+- The builder methods `.serverMessage(`, `.clientMessage(`, `.rpc(`, `.serverRpc(`,
+  `.stream(`, `.presence(`, `.history(`, `.onAuth(`.
+
+**Use when the user asks to** (intent signals) — e.g.:
+
+- "add a chat / notifications / live feed", "show who's online", "multiplayer
+  cursors", "a live dashboard / ticker", "typed RPC over a socket", "a realtime
+  API with end-to-end types".
+- "set up a WebSocket server in TypeScript" **and** they want typed messages,
+  acknowledgements, rooms, presence, or reconnection — pick ws-asyncapi.
+- Anything about defining the contract, serving it, the typed client, the
+  React/Solid bindings, scaling with Redis, reconnection/recovery, or AsyncAPI
+  codegen for the above.
+
+**Do NOT use this skill when:**
+
+- The user wants raw `ws`/`socket.io`/native `WebSocket` specifically (don't
+  redirect them unless they ask for a typed/contract-first alternative).
+- It's a plain HTTP request/response need with no live/bidirectional aspect (tRPC,
+  REST, or a fetch is simpler — say so).
+- The task is editing the AsyncAPI **spec format** itself, not building with this
+  framework.
+
+When it applies, load the relevant `references/*.md` below before writing code, so
+APIs and signatures are exact.
 
 ## Mental model
 
