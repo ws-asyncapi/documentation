@@ -26,29 +26,12 @@ It must run from inside the ws-asyncapi workspace (the parent dir provides
 `node_modules`). If it fails, the site still builds — the config falls back to a
 static API sidebar.
 
-## Shipped skill: `skills/ws-asyncapi/`
+## Adding pages
 
-`skills/ws-asyncapi/` is the **ws-asyncapi usage skill** — an
-[Agent Skill](https://agentskills.io) that teaches an AI agent to write
-application code _with_ the framework (channels, adapters, the typed client,
-React/Solid bindings, live cursors, scaling, codegen). It's `SKILL.md` + topic
-`references/`, following the [Agent Skills spec](https://agentskills.io/specification)
-(the skill's directory name matches its `name`). Validate with:
+Pages live in `docs/`; register them in the sidebar in
+`docs/.vitepress/config.ts`.
 
-```bash
-npx skills-ref validate ./skills/ws-asyncapi
-```
+## Agent skill
 
-Publish it so users can `npx skills add ws-asyncapi/...`.
-
-This is distinct from the two skills used to _author this site_:
-
-- **`vitepress`** (antfu) — VitePress config/theme/markdown mechanics.
-- **`documentation-writer`** — Diátaxis-framework technical writing.
-
-## Authoring pages
-
-Pages live in `docs/`. Register a new page in the sidebar in
-`docs/.vitepress/config.ts`. Code samples can opt into type-checked
-[Twoslash](https://shiki.style/packages/twoslash) with ` ```ts twoslash ` once
-the workspace packages are linked as dependencies here.
+`skills/ws-asyncapi/` is an [Agent Skill](https://agentskills.io) for writing app
+code _with_ ws-asyncapi. See its `SKILL.md`.
