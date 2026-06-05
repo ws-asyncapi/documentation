@@ -26,12 +26,21 @@ It must run from inside the ws-asyncapi workspace (the parent dir provides
 `node_modules`). If it fails, the site still builds — the config falls back to a
 static API sidebar.
 
-## Authoring pages
+## Shipped skill: `skills/`
 
-Two installed agent skills back this site:
+`skills/` contains the **ws-asyncapi usage skill** — an [Agent Skill](https://skills.sh)
+that teaches an AI agent to write application code _with_ the framework (channels,
+adapters, the typed client, React/Solid bindings, live cursors, scaling, codegen).
+It's `SKILL.md` + topic `references/`, modeled on
+[GramIO's skill](https://github.com/gramiojs/documentation/tree/main/skills).
+Publish it so users can `npx skills add ws-asyncapi/...`.
 
-- **`vitepress`** — VitePress config/theme/markdown mechanics.
+This is distinct from the two skills used to _author this site_:
+
+- **`vitepress`** (antfu) — VitePress config/theme/markdown mechanics.
 - **`documentation-writer`** — Diátaxis-framework technical writing.
+
+## Authoring pages
 
 Pages live in `docs/`. Register a new page in the sidebar in
 `docs/.vitepress/config.ts`. Code samples can opt into type-checked
