@@ -1,6 +1,7 @@
 ---
 name: ws-asyncapi
 description: "Build realtime apps with ws-asyncapi — the contract-first, end-to-end typed WebSocket framework for TypeScript. Use for ANY ws-asyncapi task: `ws-asyncapi`/`@ws-asyncapi/*` imports, `new Channel()`, defining serverMessage/clientMessage/rpc/serverRpc/stream/presence/history/onAuth, serving with `createNodeWsServer`/`wsAsyncAPIAdapter`, the typed `createClient<typeof channel>()`, React (`createReactClient`)/Solid (`createSolidClient`) bindings, live cursors (`@ws-asyncapi/cursors`), Redis scaling, reconnection/recovery, and AsyncAPI codegen. Activate on sight of these APIs or when building chat, presence, multiplayer cursors, live dashboards, notifications, or typed RPC over WebSockets."
+license: MIT
 metadata:
   author: ws-asyncapi
   version: "0.1.0"
