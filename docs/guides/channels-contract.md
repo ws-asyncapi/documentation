@@ -118,6 +118,21 @@ events) run correctly at runtime, but TypeScript currently can't carry the added
 types through a by-reference plugin — write those **inline** to keep full typing.
 :::
 
+**Named, idempotent plugins** — wrap a plugin with `definePlugin` to give it a
+stable name; `.use()` then applies it **at most once** per channel, so a shared
+sub-plugin used by several plugins runs a single time:
+
+```ts
+import { definePlugin } from "ws-asyncapi";
+
+const withCors = definePlugin({
+  name: "app/cors",
+  setup: (c) => c.onOpen(({ ws }) => {/* … */}),
+});
+
+channel.use(withCors).use(withCors); // setup runs once
+```
+
 ## Presence, history & auth
 
 These are covered in depth in their own guides, but they're declared on the same

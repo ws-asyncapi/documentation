@@ -155,6 +155,16 @@ return `this`) keep full typing by reference. Reusable plugins that **add typed
 context/contract** (`derive`/`resolve`/`rpc`/events) work at runtime but lose the
 added types through a by-reference call — write those **inline** to stay typed.
 
+`definePlugin({ name, setup })` tags a plugin so `.use()` applies it **at most
+once** per channel (shared dependencies dedup — a sub-plugin `.use`d by several
+plugins runs once):
+
+```ts
+import { definePlugin } from "ws-asyncapi";
+const withCors = definePlugin({ name: "app/cors", setup: (c) => c.onOpen(() => {}) });
+channel.use(withCors).use(withCors); // setup runs once
+```
+
 ## The `ws` handle (inside handlers)
 
 - `ws.subscribe(topic)` / `ws.unsubscribe(topic)` — room membership
