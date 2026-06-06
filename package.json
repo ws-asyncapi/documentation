@@ -1,0 +1,25 @@
+{
+	"name": "@ws-asyncapi/documentation",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vitepress dev docs",
+		"build": "bun run gen:typedoc && vitepress build docs",
+		"build:site": "vitepress build docs",
+		"preview": "vitepress preview docs",
+		"gen:typedoc": "bun scripts/generate-typedoc.ts"
+	},
+	"devDependencies": {
+		"@shikijs/vitepress-twoslash": "^3.2.1",
+		"@types/bun": "latest",
+		"@types/node": "^22.13.0",
+		"typedoc": "^0.28.0",
+		"typedoc-plugin-markdown": "^4.6.0",
+		"typedoc-vitepress-theme": "^1.1.2",
+		"typescript": "^5.8.2",
+		"vitepress": "^1.6.3",
+		"vitepress-plugin-group-icons": "^1.3.0",
+		"vitepress-plugin-llms": "^1.0.0",
+		"vitepress-plugin-package-managers": "^0.2.1"
+	}
+}

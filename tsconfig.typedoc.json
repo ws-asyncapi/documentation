@@ -1,0 +1,34 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"lib": ["ESNext", "DOM"],
+		"strict": false,
+		"skipLibCheck": true,
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+		"baseUrl": "..",
+		"paths": {
+			"ws-asyncapi": ["./core/src/index.ts"],
+			"ws-asyncapi/*": ["./core/src/*"],
+			"@ws-asyncapi/client": ["./client/src/index.ts"],
+			"@ws-asyncapi/query-core": ["./query-core/src/index.ts"],
+			"@ws-asyncapi/react": ["./react/src/index.ts"],
+			"@ws-asyncapi/solid": ["./solid/src/index.ts"],
+			"@ws-asyncapi/cursors": ["./cursors/src/index.ts"],
+			"@ws-asyncapi/emitter": ["./emitter/src/index.ts"],
+			"@ws-asyncapi/testing": ["./testing/src/index.ts"]
+		}
+	},
+	"include": [
+		"../core/src/**/*.ts",
+		"../client/src/**/*.ts",
+		"../query-core/src/**/*.ts",
+		"../react/src/**/*.ts",
+		"../solid/src/**/*.ts",
+		"../cursors/src/**/*.ts",
+		"../emitter/src/**/*.ts",
+		"../testing/src/**/*.ts"
+	]
+}
