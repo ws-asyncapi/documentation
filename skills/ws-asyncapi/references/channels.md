@@ -135,6 +135,26 @@ new Channel("/room/:id", "room")
     .onError(({ error }) => console.error(error));
 ```
 
+## Plugins (`.use`)
+
+`channel.use(plugin)` applies `(channel) => extended channel`. Generics thread
+through, so the plugin's return type is the widened channel.
+
+```ts
+// inline — fully typed for any contribution (context, contract, hooks)
+channel.use((c) => c.derive(({ request }) => ({ token: request.query.token })));
+
+// reusable hook plugin (rate-limit/logging/metrics/guards) — typed by reference
+const rateLimit = (opts: { max: number }) => <C extends AnyChannel>(c: C) =>
+    c.beforeMessage(({ ws }) => { if (over(ws.id, opts)) throw new RpcError("OVERLOADED", "slow down"); });
+channel.use(rateLimit({ max: 100 }));
+```
+
+Reusable hook plugins (only `beforeMessage`/`onError`/`onOpen`/`onClose`, which
+return `this`) keep full typing by reference. Reusable plugins that **add typed
+context/contract** (`derive`/`resolve`/`rpc`/events) work at runtime but lose the
+added types through a by-reference call — write those **inline** to stay typed.
+
 ## The `ws` handle (inside handlers)
 
 - `ws.subscribe(topic)` / `ws.unsubscribe(topic)` — room membership

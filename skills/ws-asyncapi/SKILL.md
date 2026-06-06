@@ -118,6 +118,10 @@ Lifecycle & context: `.onOpen`, `.onClose`, `.derive(fn)`, `.resolve(async fn)`,
 `ws` exposes `subscribe`, `publish(topic, event, data)`, `broadcast`, and (for
 `serverRpc`) `request`.
 
+Plugins: `.use(plugin)` applies `(channel) => extended channel` to package
+reusable setup. Inline plugins keep full typing for any contribution; reusable
+hook plugins (rate-limit/logging) too. See [references/channels.md](references/channels.md).
+
 ## References
 
 Load the reference for the task at hand:

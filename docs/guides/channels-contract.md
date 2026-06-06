@@ -86,6 +86,38 @@ receives (Elysia-style). Use them for auth, dependency injection, and
 per-connection state. See [RPC & acknowledgements](/guides/rpc) for how errors in
 this pipeline surface to callers.
 
+## Plugins (`.use`)
+
+`channel.use(plugin)` applies a function `(channel) => extended channel`. Since
+every builder method threads the channel's generics, the plugin's return type
+*is* the widened channel — so a plugin can package reusable setup (context, hooks,
+even contract additions) as a unit.
+
+**Inline** (fully typed for any contribution):
+
+```ts
+const chat = new Channel("/chat/:room", "chat")
+  .use((c) => c.derive(({ request }) => ({ token: request.query.token })))
+  .use((c) => c.serverMessage("message", z.object({ text: z.string() })));
+```
+
+**Reusable hook plugins** (rate-limit, logging, metrics, guards) compose by
+reference with full typing — they use `.beforeMessage`/`.onError`/`.onOpen`/
+`.onClose`, which return the same channel type:
+
+```ts
+const rateLimit = (opts: { max: number }) => <C extends AnyChannel>(c: C) =>
+  c.beforeMessage(({ ws }) => { if (over(ws.id, opts)) throw new RpcError("OVERLOADED", "slow down"); });
+
+channel.use(rateLimit({ max: 100 }));
+```
+
+::: tip
+Reusable plugins that *add typed context or contract* (`derive`/`resolve`/`rpc`/
+events) run correctly at runtime, but TypeScript currently can't carry the added
+types through a by-reference plugin — write those **inline** to keep full typing.
+:::
+
 ## Presence, history & auth
 
 These are covered in depth in their own guides, but they're declared on the same
