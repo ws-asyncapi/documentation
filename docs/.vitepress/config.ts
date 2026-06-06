@@ -8,10 +8,15 @@ import {
 import llms, { copyOrDownloadAsMarkdownButtons } from "vitepress-plugin-llms";
 import { packageManagersMarkdownPlugin } from "vitepress-plugin-package-managers";
 
-// Public site origin — used for the sitemap, canonical links, OG tags, and
-// llms.txt. PLACEHOLDER: set the real domain via `SITE_URL` (or edit here) before
-// deploying. There is no confirmed ws-asyncapi domain yet.
-const SITE = process.env.SITE_URL ?? "https://example.invalid";
+// Site URLs. `ORIGIN` is the bare host; `BASE` is the path the site is served
+// under (GitHub Pages serves this project at /documentation/). `SITE` is the full
+// canonical origin+base. These are kept distinct because the consumers below treat
+// the base differently: the llms plugin appends `base` to `domain` itself (so it
+// gets ORIGIN), the sitemap joins paths against the host only (so it gets ORIGIN +
+// a base-prefixing transform), while canonical/OG links need the full SITE.
+const ORIGIN = process.env.SITE_ORIGIN ?? "https://ws-asyncapi.github.io";
+const BASE = process.env.BASE_URL ?? "/";
+const SITE = (ORIGIN + BASE).replace(/\/$/, "");
 
 // TypeDoc-generated API sidebar — present only after `bun run gen:typedoc`.
 // typedoc-vitepress-theme writes an array (one entry per package module); we wrap
@@ -40,7 +45,7 @@ export default defineConfig({
 	lang: "en-US",
 	cleanUrls: true,
 	lastUpdated: true,
-	base: process.env.BASE_URL ?? "/",
+	base: BASE,
 
 	// API pages are code-generated; their cross-links may not exist before gen.
 	ignoreDeadLinks: [
@@ -72,7 +77,16 @@ export default defineConfig({
 		],
 	],
 
-	sitemap: { hostname: SITE },
+	sitemap: {
+		hostname: ORIGIN,
+		// VitePress joins each page path against the host only, dropping `base`;
+		// re-add it so loc URLs match where the site is actually served.
+		transformItems: (items) =>
+			items.map((item) => ({
+				...item,
+				url: BASE.replace(/^\//, "") + item.url,
+			})),
+	},
 
 	transformHead: ({ pageData: { relativePath } }) => {
 		const canonical = `${SITE}/${relativePath}`
@@ -85,7 +99,7 @@ export default defineConfig({
 		plugins: [
 			groupIconVitePlugin(),
 			llms({
-				domain: SITE,
+				domain: ORIGIN,
 				description:
 					"ws-asyncapi — contract-first, end-to-end typed WebSockets for TypeScript: events, RPC (acks), streams, presence, history, and live cursors, with React/Solid bindings.",
 				ignoreFiles: [],
@@ -132,6 +146,7 @@ export default defineConfig({
 		nav: [
 			{ text: "Guide", link: "/introduction" },
 			{ text: "Get started", link: "/get-started" },
+			{ text: "AI agents", link: "/guides/ai-agents" },
 			{ text: "API", link: "/api/" },
 		],
 		sidebar: {
@@ -160,6 +175,7 @@ export default defineConfig({
 						{ text: "RPC & acknowledgements", link: "/guides/rpc" },
 						{ text: "Presence & live cursors", link: "/guides/presence-cursors" },
 						{ text: "React & Solid bindings", link: "/guides/react-solid" },
+						{ text: "AI agents & LLMs", link: "/guides/ai-agents" },
 					],
 				},
 			],
