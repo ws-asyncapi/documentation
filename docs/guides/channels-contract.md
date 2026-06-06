@@ -155,6 +155,24 @@ const withCors = definePlugin({
 channel.use(withCors).use(withCors); // setup runs once
 ```
 
+**Server-level plugins** — for cross-channel infrastructure (metrics, tracing,
+audit logging) that observes rather than shapes the contract, pass a `ServerPlugin`
+to the adapter. It taps the lifecycle of every channel
+(`onConnection`/`onDisconnect`/`onMessage`/`onError`), fire-and-forget and
+isolated:
+
+```ts
+import type { ServerPlugin } from "ws-asyncapi";
+
+const metrics: ServerPlugin = {
+  onConnection: ({ channel, socketId }) => {/* … */},
+  onMessage: ({ channel, kind, name }) => {/* … */},
+  onError: ({ channel, error }) => {/* … */},
+};
+
+createNodeWsServer([chat, board], { port: 3000, plugins: [metrics] });
+```
+
 ## Presence, history & auth
 
 These are covered in depth in their own guides, but they're declared on the same

@@ -108,3 +108,26 @@ await a.opened;
 const { id } = await a.request("send", { text: "hi" });
 await h.close();
 ```
+
+## Server-level plugins
+
+Cross-channel infrastructure (metrics, tracing, audit logging) — distinct from
+channel plugins (`.use`). A `ServerPlugin` observes the lifecycle of every channel
+on the server; pass them to the adapter (or the test harness). Hooks are
+fire-and-forget and isolated (a throwing hook never breaks the connection).
+
+```ts
+import type { ServerPlugin } from "ws-asyncapi";
+
+const metrics: ServerPlugin = {
+    name: "metrics",
+    onConnection: ({ channel, socketId }) => {},
+    onDisconnect: ({ channel, socketId }) => {},
+    onMessage: ({ channel, kind, name }) => {},  // kind = numeric Frame; name when present
+    onError: ({ channel, error }) => {},          // command + rpc handler throws
+};
+
+createNodeWsServer([chat, board], { port: 3000, plugins: [metrics] });
+// elysia: wsAsyncAPIAdapter([chat], { plugins: [metrics] })
+// tests:  createTestHarness(chat, { plugins: [metrics] })
+```
