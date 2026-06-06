@@ -11,8 +11,18 @@
 	},
 	"devDependencies": {
 		"@shikijs/vitepress-twoslash": "^3.2.1",
+		"@tanstack/query-core": "^5.0.0",
 		"@types/bun": "latest",
 		"@types/node": "^22.13.0",
+		"@ws-asyncapi/client": "^0.1.0",
+		"@ws-asyncapi/cursors": "^0.1.0",
+		"@ws-asyncapi/emitter": "^0.1.0",
+		"@ws-asyncapi/query-core": "^0.1.0",
+		"@ws-asyncapi/react": "^0.1.0",
+		"@ws-asyncapi/solid": "^0.1.0",
+		"@ws-asyncapi/testing": "^0.1.0",
+		"react": "^19.0.0",
+		"solid-js": "^1.9.0",
 		"typedoc": "^0.28.0",
 		"typedoc-plugin-markdown": "^4.6.0",
 		"typedoc-vitepress-theme": "^1.1.2",
@@ -20,6 +30,7 @@
 		"vitepress": "^1.6.3",
 		"vitepress-plugin-group-icons": "^1.3.0",
 		"vitepress-plugin-llms": "^1.0.0",
-		"vitepress-plugin-package-managers": "^0.2.1"
+		"vitepress-plugin-package-managers": "^0.2.1",
+		"ws-asyncapi": "^0.1.1"
 	}
 }

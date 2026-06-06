@@ -23,7 +23,9 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Build site
-        run: bun run build:site
+        # `build` runs gen:typedoc (API reference from the published @ws-asyncapi
+        # packages installed above) then `vitepress build`.
+        run: bun run build
         env:
           # served at https://ws-asyncapi.github.io/documentation/
           BASE_URL: /documentation/
