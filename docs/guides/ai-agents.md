@@ -50,8 +50,9 @@ agent to focused references before it writes code:
 | `adapters-scaling` | Node & Elysia adapters, the backplane interface, Redis scaling, msgpack codec, the external emitter |
 | `presence-cursors` | Typed presence, volatile updates, per-room history, live cursors |
 | `auth` | `.onAuth` + `client.authenticate` token refresh, auth in `derive`/`resolve` |
-| `react-solid` | `@ws-asyncapi/react` hooks and `@ws-asyncapi/solid` primitives over TanStack Query |
-| `codegen` | The AsyncAPI 3.0 document and the CLI-generated client |
+| `react-solid` | `@ws-asyncapi/react` hooks and `@ws-asyncapi/solid` primitives over TanStack Query (`@ws-asyncapi/query-core`) |
+| `codegen` | The AsyncAPI 3.0 document and the CLI-generated client (`@ws-asyncapi/cli`) |
+| `testing` | In-memory test harness (`@ws-asyncapi/testing`) |
 
 ### Install it
 

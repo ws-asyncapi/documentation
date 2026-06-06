@@ -93,21 +93,11 @@ await emitter.close();
 
 One-way only (no acks/presence), typed to the channel's events.
 
-## Testing (`@ws-asyncapi/testing`)
+## Testing
 
-In-memory harness that reuses the real dispatcher over a linked socket pair — high
-fidelity, fast, synchronous:
-
-```ts
-import { createTestHarness } from "@ws-asyncapi/testing";
-
-const h = createTestHarness(chat);
-const a = h.connect();        // typed client
-const b = h.connect();
-await a.opened;
-const { id } = await a.request("send", { text: "hi" });
-await h.close();
-```
+The in-memory test harness (`@ws-asyncapi/testing`) drives this same dispatcher and
+backplane — including a **shared backplane to simulate multiple cluster nodes**. See
+[testing.md](testing.md).
 
 ## Server-level plugins
 

@@ -133,8 +133,9 @@ Load the reference for the task at hand:
 | [references/adapters-scaling.md](references/adapters-scaling.md) | Node & Elysia adapters, the backplane interface, Redis scaling, msgpack codec, the external emitter |
 | [references/presence-cursors.md](references/presence-cursors.md) | Typed presence, volatile updates, per-room history, and live cursors with `@ws-asyncapi/cursors` |
 | [references/auth.md](references/auth.md) | `.onAuth` + `client.authenticate` (token refresh), auth in `derive`/`resolve` |
-| [references/react-solid.md](references/react-solid.md) | `@ws-asyncapi/react` hooks and `@ws-asyncapi/solid` primitives over TanStack Query, binding stores |
-| [references/codegen.md](references/codegen.md) | The AsyncAPI 3.0 document and the CLI-generated client (`websocketAsyncAPI`) |
+| [references/react-solid.md](references/react-solid.md) | `@ws-asyncapi/react` hooks and `@ws-asyncapi/solid` primitives over TanStack Query (`@ws-asyncapi/query-core`), binding stores |
+| [references/codegen.md](references/codegen.md) | The AsyncAPI 3.0 document and the CLI-generated client (`websocketAsyncAPI`) — `@ws-asyncapi/cli` |
+| [references/testing.md](references/testing.md) | In-memory test harness — `createTestHarness` from `@ws-asyncapi/testing` |
 
 ## Conventions
 
@@ -151,8 +152,20 @@ Load the reference for the task at hand:
 
 ## Packages
 
-`ws-asyncapi` (core) · `@ws-asyncapi/client` · `@ws-asyncapi/adapter-node` ·
-`@ws-asyncapi/adapter-elysia` · `@ws-asyncapi/backplane-redis` ·
-`@ws-asyncapi/codec-msgpack` · `@ws-asyncapi/emitter` · `@ws-asyncapi/testing` ·
-`@ws-asyncapi/query-core` · `@ws-asyncapi/react` · `@ws-asyncapi/solid` ·
-`@ws-asyncapi/cursors` · `@ws-asyncapi/cli`.
+Every package and where it's documented:
+
+| Package | Reference |
+| --- | --- |
+| `ws-asyncapi` (core — `Channel`, `RpcError`, `getAsyncApiDocument`/`getAsyncApiUI`, `LocalBackplane`, `ServerPlugin`, `definePlugin`) | [channels](references/channels.md) · [auth](references/auth.md) · [codegen](references/codegen.md) |
+| `@ws-asyncapi/client` | [client](references/client.md) |
+| `@ws-asyncapi/adapter-node` | [adapters-scaling](references/adapters-scaling.md) |
+| `@ws-asyncapi/adapter-elysia` | [adapters-scaling](references/adapters-scaling.md) |
+| `@ws-asyncapi/backplane-redis` | [adapters-scaling](references/adapters-scaling.md) |
+| `@ws-asyncapi/codec-msgpack` | [adapters-scaling](references/adapters-scaling.md) |
+| `@ws-asyncapi/emitter` | [adapters-scaling](references/adapters-scaling.md) |
+| `@ws-asyncapi/testing` | [testing](references/testing.md) |
+| `@ws-asyncapi/query-core` | [react-solid](references/react-solid.md) |
+| `@ws-asyncapi/react` | [react-solid](references/react-solid.md) |
+| `@ws-asyncapi/solid` | [react-solid](references/react-solid.md) |
+| `@ws-asyncapi/cursors` | [presence-cursors](references/presence-cursors.md) |
+| `@ws-asyncapi/cli` | [codegen](references/codegen.md) |

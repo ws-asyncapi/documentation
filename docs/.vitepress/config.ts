@@ -173,8 +173,23 @@ export default defineConfig({
 					items: [
 						{ text: "Channels & the contract", link: "/guides/channels-contract" },
 						{ text: "RPC & acknowledgements", link: "/guides/rpc" },
+						{ text: "Authentication", link: "/guides/auth" },
 						{ text: "Presence & live cursors", link: "/guides/presence-cursors" },
 						{ text: "React & Solid bindings", link: "/guides/react-solid" },
+					],
+				},
+				{
+					text: "Deployment & scaling",
+					items: [
+						{ text: "Adapters (Node & Elysia)", link: "/guides/adapters" },
+						{ text: "Scaling & the backplane", link: "/guides/scaling" },
+					],
+				},
+				{
+					text: "Tooling",
+					items: [
+						{ text: "AsyncAPI & codegen", link: "/guides/codegen" },
+						{ text: "Testing", link: "/guides/testing" },
 						{ text: "AI agents & LLMs", link: "/guides/ai-agents" },
 					],
 				},

@@ -152,6 +152,24 @@ function Cursors() {
 `ws.client` is the underlying, precisely-typed client — the escape hatch for
 anything the hooks don't wrap (`opened`, raw `request`, `presence.update`, …).
 
+## Other frameworks
+
+Both bindings are thin wrappers over **`@ws-asyncapi/query-core`** — plain
+functions and small `{ subscribe, getSnapshot }` stores, since
+[`@tanstack/query-core`](https://tanstack.com/query) powers React, Solid, Vue,
+Svelte, and Angular alike. To wire ws-asyncapi into a framework without a binding
+yet, map query-core's pieces onto that framework's primitives:
+
+- **Option factories** → its `useQuery`/`useMutation`: `requestQueryOptions`,
+  `mutationOptions`, `historyQueryOptions`.
+- **Stores** → its external-store hook (`useSyncExternalStore`, Solid's `from`, …):
+  `presenceStore`, `streamStore`, `lastEventStore`, `connectionStore`.
+- **Live cache glue**: `subscribeHistoryLive` appends incoming events into a history
+  query's cache entry.
+
+`@ws-asyncapi/react` is the reference implementation. You rarely install query-core
+directly — reach for it only when writing a new binding.
+
 ## Next
 
 - [**Presence & live cursors**](/guides/presence-cursors) — the store these hooks bind.
