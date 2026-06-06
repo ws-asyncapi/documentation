@@ -112,10 +112,32 @@ const rateLimit = (opts: { max: number }) => <C extends AnyChannel>(c: C) =>
 channel.use(rateLimit({ max: 100 }));
 ```
 
-::: tip
-Reusable plugins that *add typed context or contract* (`derive`/`resolve`/`rpc`/
-events) run correctly at runtime, but TypeScript currently can't carry the added
-types through a by-reference plugin — write those **inline** to keep full typing.
+**Reusable context/contract plugins** — to package reusable *context or contract*
+(a `derive`d user, an `rpc`, events) and keep full typing, author the plugin as a
+**channel** built on a base, and `.use()` it. Its contributions are merged into
+the host with complete inference:
+
+```ts
+// a reusable plugin, authored as a channel
+const auth = new Channel("/", "auth")
+  .derive(() => ({ user: getUser() }))
+  .rpc("login", z.object({ pw: z.string() }), z.object({ ok: z.boolean() }), async () => ({ ok: true }))
+  .serverMessage("kicked", z.object({ reason: z.string() }));
+
+const chat = new Channel("/chat/:room", "chat")
+  .serverMessage("message", z.object({ text: z.string() }))
+  .use(auth); // ← `user`, the `login` rpc, and the `kicked` event are all merged + typed
+```
+
+Merging combines events/commands/rpc/server-rpc/streams and derived context
+(plugin contributions run after the host's); single lifecycle hooks compose;
+`presence`/`auth`/`query`/`headers` are adopted only if the host hasn't set them.
+
+::: tip Which form?
+**Inline** (`c => c....`) and **channel** (`new Channel(...).…`) plugins are both
+fully typed for any contribution. The **reusable function** form
+(`<C>(c: C) => c.…`) is fully typed only for hook-only plugins (rate-limit,
+logging) — for reusable *context/contract*, use the channel form above.
 :::
 
 **Named, idempotent plugins** — wrap a plugin with `definePlugin` to give it a

@@ -150,10 +150,16 @@ const rateLimit = (opts: { max: number }) => <C extends AnyChannel>(c: C) =>
 channel.use(rateLimit({ max: 100 }));
 ```
 
-Reusable hook plugins (only `beforeMessage`/`onError`/`onOpen`/`onClose`, which
-return `this`) keep full typing by reference. Reusable plugins that **add typed
-context/contract** (`derive`/`resolve`/`rpc`/events) work at runtime but lose the
-added types through a by-reference call — write those **inline** to stay typed.
+Plugin forms and typing:
+- **Inline** `c.use(c => c.derive(...).rpc(...))` — full typing, any contribution.
+- **Channel plugin** `c.use(new Channel("/","p").derive(...).rpc(...))` — a reusable
+  plugin authored as a channel; its context + contract are MERGED into the host
+  with full typing (events/commands/rpc/server-rpc/streams/derived context combine,
+  lifecycle hooks compose, presence/auth/query/headers adopted if host unset).
+- **Reusable function** `<C extends AnyChannel>(c: C) => c.beforeMessage(...)` —
+  fully typed only for hook-only plugins (they return `this`); a reusable function
+  that adds context/contract works at runtime but loses the added types — use the
+  channel form for those.
 
 `definePlugin({ name, setup })` tags a plugin so `.use()` applies it **at most
 once** per channel (shared dependencies dedup — a sub-plugin `.use`d by several
